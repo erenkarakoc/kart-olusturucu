@@ -78,10 +78,10 @@ export default function ClientPageContent() {
   const formattedTelefon = formatPhoneWithParentheses(debouncedTelefon);
   const formattedOfisTelefon = formatPhoneWithParentheses(debouncedOfisTelefon);
 
-  const [kartvizitPdf, setKartvizitPdf] = useState(null);
-  const [yakaKartiPdf, setYakaKartiPdf] = useState(null);
-  const [kartvizitPdfForDownload, setKartvizitPdfForDownload] = useState(null);
-  const [yakaKartiPdfForDownload, setYakaKartiPdfForDownload] = useState(null);
+  const [kartvizitPdf, setKartvizitPdf] = useState<{ data: Uint8Array } | null>(null);
+  const [yakaKartiPdf, setYakaKartiPdf] = useState<{ data: Uint8Array } | null>(null);
+  const [kartvizitPdfForDownload, setKartvizitPdfForDownload] = useState<{ data: Uint8Array } | null>(null);
+  const [yakaKartiPdfForDownload, setYakaKartiPdfForDownload] = useState<{ data: Uint8Array } | null>(null);
   const [isPreviewLoading, setIsPreviewLoading] = useState(true);
   const [isDownloadingKartvizit, setIsDownloadingKartvizit] = useState(false);
   const [isDownloadingYakaKarti, setIsDownloadingYakaKarti] = useState(false);
@@ -202,16 +202,18 @@ export default function ClientPageContent() {
     updateCanvases();
   }, [debouncedAd, debouncedSoyad, debouncedUnvan, debouncedTelefon, debouncedOfisTelefon, debouncedEmail, debouncedAdres, formattedTelefon, formattedOfisTelefon]);
 
-  const handleDownload = async (pdfBytes, fileName, setIsDownloading) => {
+  const handleDownload = async (
+    pdfBytes: { data: Uint8Array } | null,
+    fileName: string,
+    setIsDownloading: (loading: boolean) => void
+  ) => {
     if (!pdfBytes || !pdfBytes.data) {
       return;
     }
     setIsDownloading(true);
     try {
-      // Ensure we have a proper Uint8Array
-      const uint8Array = pdfBytes.data instanceof Uint8Array
-        ? pdfBytes.data
-        : new Uint8Array(pdfBytes.data);
+      // Convert to proper Uint8Array
+      const uint8Array = new Uint8Array(Array.from(pdfBytes.data));
 
       if (uint8Array.length === 0) {
         throw new Error("PDF verisi boş!");
@@ -232,7 +234,7 @@ export default function ClientPageContent() {
       a.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      alert(`Dosya indirilirken bir hata oluştu: ${error.message}`);
+      alert(`Dosya indirilirken bir hata oluştu: ${(error as Error).message}`);
     } finally {
       setIsDownloading(false);
     }
@@ -326,7 +328,7 @@ export default function ClientPageContent() {
         </CardContent>
       </Card>
 
-      <DynamicPdfPreview kartvizitPdf={kartvizitPdf} yakaKartiPdf={yakaKartiPdf} isPreviewLoading={isPreviewLoading} />
+      <DynamicPdfPreview kartvizitPdf={kartvizitPdf} yakaKartiPdf={yakaKartiPdf} />
     </div>
   );
 }

@@ -7,7 +7,12 @@ import { useEffect } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function PdfPreview({ kartvizitPdf, yakaKartiPdf }) {
+interface PdfPreviewProps {
+  kartvizitPdf: { data: Uint8Array } | null;
+  yakaKartiPdf: { data: Uint8Array } | null;
+}
+
+export default function PdfPreview({ kartvizitPdf, yakaKartiPdf }: PdfPreviewProps) {
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
   }, []);
