@@ -59,7 +59,7 @@ export default function ClientPageContent() {
   // Anlık input değerleri
   const [ad, setAd] = useState('Ad');
   const [soyad, setSoyad] = useState('Soyad');
-  const [unvan, setUnvan] = useState('Ünvan');
+  const [unvan, setUnvan] = useState('Gayrimenkul Danışmanı');
   const [telefon, setTelefon] = useState('+905425551243');
   const [ofisTelefon, setOfisTelefon] = useState('+905333150343');
   const [email, setEmail] = useState('info@lyrarealestate.com');
@@ -238,8 +238,15 @@ export default function ClientPageContent() {
     }
   };
 
-  const handleDownloadKartvizit = () => handleDownload(kartvizitPdfForDownload, 'kartvizit.pdf', setIsDownloadingKartvizit);
-  const handleDownloadYakaKarti = () => handleDownload(yakaKartiPdfForDownload, 'yaka-karti.pdf', setIsDownloadingYakaKarti);
+  const handleDownloadKartvizit = () => {
+    const fileName = `${debouncedAd} ${debouncedSoyad} Kartvizit.pdf`;
+    handleDownload(kartvizitPdfForDownload, fileName, setIsDownloadingKartvizit);
+  };
+
+  const handleDownloadYakaKarti = () => {
+    const fileName = `${debouncedAd} ${debouncedSoyad} Yaka Kartı.pdf`;
+    handleDownload(yakaKartiPdfForDownload, fileName, setIsDownloadingYakaKarti);
+  };
 
   const handleDownloadFonts = () => {
     const a = document.createElement('a');
@@ -251,28 +258,28 @@ export default function ClientPageContent() {
   };
 
   return (
-    <div className="flex justify-between gap-8 w-full overflow-hidden">
-      <Card className="w-[450px] h-fit flex-shrink-0 overflow-y-auto max-h-full">
+    <div className="grid grid-cols-1 md:grid-cols-[450px_1fr] gap-4 md:gap-8 w-full overflow-x-hidden p-4 md:p-8">
+      <Card className="h-fit w-full">
         <CardHeader>
-          <CardDescription>Bilgilerinizi girerek kartvizit ve yaka kartı oluşturun.</CardDescription>
+          <CardDescription className="text-xs md:text-sm">Bilgilerinizi girerek kartvizit ve yaka kartı oluşturun.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="ad" className="font-normal">Ad</Label>
-              <Input id="ad" placeholder="Adınız" value={ad} onChange={(e) => setAd(e.target.value)} />
+              <Label htmlFor="ad" className="font-normal text-xs md:text-sm">Ad</Label>
+              <Input id="ad" placeholder="Adınız" value={ad} onChange={(e) => setAd(e.target.value)} className="text-sm md:text-base" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="soyad" className="font-normal">Soyad</Label>
-              <Input id="soyad" placeholder="Soyadınız" value={soyad} onChange={(e) => setSoyad(e.target.value)} />
+              <Label htmlFor="soyad" className="font-normal text-xs md:text-sm">Soyad</Label>
+              <Input id="soyad" placeholder="Soyadınız" value={soyad} onChange={(e) => setSoyad(e.target.value)} className="text-sm md:text-base" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="unvan" className="font-normal">Gayrimenkul Danışmanı</Label>
-              <Textarea id="unvan" placeholder="Ünvanınız" value={unvan} onChange={(e) => setUnvan(e.target.value)} rows={2} />
-              <span className="opacity-50 text-xs">Satır ayırmak için Enter kullanın</span>
+              <Label htmlFor="unvan" className="font-normal text-xs md:text-sm">Ünvan</Label>
+              <Textarea id="unvan" placeholder="Ünvanınız" value={unvan} onChange={(e) => setUnvan(e.target.value)} rows={2} className="text-sm md:text-base" />
+              <span className="opacity-50 text-[10px] md:text-xs">Satır ayırmak için Enter kullanın</span>
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="telefon" className="font-normal">Cep Telefonu</Label>
+              <Label htmlFor="telefon" className="font-normal text-xs md:text-sm">Cep Telefonu</Label>
               <PhoneInput
                 id="telefon"
                 placeholder="Telefon Numaranız"
@@ -284,7 +291,7 @@ export default function ClientPageContent() {
               />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="ofisTelefon" className="font-normal">Ofis Telefonu</Label>
+              <Label htmlFor="ofisTelefon" className="font-normal text-xs md:text-sm">Ofis Telefonu</Label>
               <PhoneInput
                 id="ofisTelefon"
                 placeholder="Ofis Telefonu"
@@ -296,23 +303,23 @@ export default function ClientPageContent() {
               />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="email" className="font-normal">Email</Label>
-              <Input id="email" type="email" placeholder="Email Adresiniz" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Label htmlFor="email" className="font-normal text-xs md:text-sm">Email</Label>
+              <Input id="email" type="email" placeholder="Email Adresiniz" value={email} onChange={(e) => setEmail(e.target.value)} className="text-sm md:text-base" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="adres" className="font-normal">Adres</Label>
-              <Textarea id="adres" placeholder="Adresiniz" value={adres} onChange={(e) => setAdres(e.target.value)} rows={2} />
-              <span className="opacity-50 text-xs">Satır ayırmak için Enter kullanın</span>
+              <Label htmlFor="adres" className="font-normal text-xs md:text-sm">Adres</Label>
+              <Textarea id="adres" placeholder="Adresiniz" value={adres} onChange={(e) => setAdres(e.target.value)} rows={2} className="text-sm md:text-base" />
+              <span className="opacity-50 text-[10px] md:text-xs">Satır ayırmak için Enter kullanın</span>
             </div>
             <div className="flex gap-2 w-full mt-4">
-              <Button type="button" className="font-light w-50" onClick={handleDownloadKartvizit} disabled={isPreviewLoading || isDownloadingKartvizit}>
+              <Button type="button" className="font-light flex-1 text-xs md:text-sm" onClick={handleDownloadKartvizit} disabled={isPreviewLoading || isDownloadingKartvizit}>
                 {isDownloadingKartvizit ? <Spinner /> : "Kartviziti İndir"}
               </Button>
-              <Button type="button" className="font-light w-50" onClick={handleDownloadYakaKarti} disabled={isPreviewLoading || isDownloadingYakaKarti}>
+              <Button type="button" className="font-light flex-1 text-xs md:text-sm" onClick={handleDownloadYakaKarti} disabled={isPreviewLoading || isDownloadingYakaKarti}>
                 {isDownloadingYakaKarti ? <Spinner /> : "Yaka Kartını İndir"}
               </Button>
             </div>
-            <Button type="button" className="font-light w-full" onClick={handleDownloadFonts}>
+            <Button type="button" className="font-light w-full text-xs md:text-sm" onClick={handleDownloadFonts}>
               Yazı Tipini İndir
             </Button>
           </div>
