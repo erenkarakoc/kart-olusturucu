@@ -241,9 +241,18 @@ export default function ClientPageContent() {
   const handleDownloadKartvizit = () => handleDownload(kartvizitPdfForDownload, 'kartvizit.pdf', setIsDownloadingKartvizit);
   const handleDownloadYakaKarti = () => handleDownload(yakaKartiPdfForDownload, 'yaka-karti.pdf', setIsDownloadingYakaKarti);
 
+  const handleDownloadFonts = () => {
+    const a = document.createElement('a');
+    a.href = '/unbounded-fonts.zip';
+    a.download = 'unbounded-fonts.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
   return (
-    <div className="flex justify-between gap-2 w-full">
-      <Card className="w-[450px] h-fit">
+    <div className="flex justify-between gap-8 w-full overflow-hidden">
+      <Card className="w-[450px] h-fit flex-shrink-0 overflow-y-auto max-h-full">
         <CardHeader>
           <CardDescription>Bilgilerinizi girerek kartvizit ve yaka kartı oluşturun.</CardDescription>
         </CardHeader>
@@ -258,7 +267,7 @@ export default function ClientPageContent() {
               <Input id="soyad" placeholder="Soyadınız" value={soyad} onChange={(e) => setSoyad(e.target.value)} />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="unvan" className="font-normal">Ünvan</Label>
+              <Label htmlFor="unvan" className="font-normal">Gayrimenkul Danışmanı</Label>
               <Textarea id="unvan" placeholder="Ünvanınız" value={unvan} onChange={(e) => setUnvan(e.target.value)} rows={2} />
               <span className="opacity-50 text-xs">Satır ayırmak için Enter kullanın</span>
             </div>
@@ -295,14 +304,17 @@ export default function ClientPageContent() {
               <Textarea id="adres" placeholder="Adresiniz" value={adres} onChange={(e) => setAdres(e.target.value)} rows={2} />
               <span className="opacity-50 text-xs">Satır ayırmak için Enter kullanın</span>
             </div>
-            <div className="flex flex-col gap-4 w-full mt-4">
-              <Button type="button" className="w-full font-light" onClick={handleDownloadKartvizit} disabled={isPreviewLoading || isDownloadingKartvizit}>
+            <div className="flex gap-2 w-full mt-4">
+              <Button type="button" className="font-light w-50" onClick={handleDownloadKartvizit} disabled={isPreviewLoading || isDownloadingKartvizit}>
                 {isDownloadingKartvizit ? <Spinner /> : "Kartviziti İndir"}
               </Button>
-              <Button type="button" className="w-full font-light" onClick={handleDownloadYakaKarti} disabled={isPreviewLoading || isDownloadingYakaKarti}>
+              <Button type="button" className="font-light w-50" onClick={handleDownloadYakaKarti} disabled={isPreviewLoading || isDownloadingYakaKarti}>
                 {isDownloadingYakaKarti ? <Spinner /> : "Yaka Kartını İndir"}
               </Button>
             </div>
+            <Button type="button" className="font-light w-full" onClick={handleDownloadFonts}>
+              Yazı Tipini İndir
+            </Button>
           </div>
         </CardContent>
       </Card>

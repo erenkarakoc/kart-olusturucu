@@ -13,21 +13,21 @@ export default function PdfPreview({ kartvizitPdf, yakaKartiPdf }) {
   }, []);
 
   return (
-    <div className="flex gap-8">
-      <div>
-        <div className="w-[400px] h-[225px] overflow-hidden flex items-center justify-center shadow-xl">
+    <div className="flex flex-col xl:flex-row gap-8 w-full h-full">
+      <div className="w-full xl:flex-1 flex">
+        <div className="w-full max-w-[600px] aspect-[9.4/5.6] overflow-hidden shadow-xl">
           {kartvizitPdf ? (
             <Document file={kartvizitPdf} loading={<Skeleton className="w-full h-full" />}>
-              <Page pageNumber={1} width={400} />
+              <Page pageNumber={1} width={600} className="max-w-full h-auto" />
             </Document>
           ) : <Skeleton className="w-full h-full" />}
         </div>
       </div>
-      <div>
-        <div className="w-[375px] h-[525px] overflow-hidden flex items-center justify-center shadow-xl">
+      <div className="w-full xl:w-auto xl:h-full">
+        <div className="w-full max-w-[450px] xl:max-w-none xl:w-auto xl:h-[calc(100vh-8rem)] aspect-[7.5/10.5] overflow-hidden flex justify-center shadow-xl">
           {yakaKartiPdf ? (
             <Document file={yakaKartiPdf} loading={<Skeleton className="w-full h-full" />}>
-              <Page pageNumber={1} width={375} />
+              <Page pageNumber={1} height={typeof window !== 'undefined' ? Math.min(window.innerHeight - 128, 700) : 700} className="max-w-full h-auto" />
             </Document>
           ) : <Skeleton className="w-full h-full" />}
         </div>
