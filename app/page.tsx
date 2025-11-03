@@ -3,7 +3,7 @@ import ClientPageContent from '@/components/local/ClientPageContent';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col p-8 gap-8">
+    <main className="flex min-h-screen flex-col p-2 md:p-8 gap-8">
       <div className="flex items-center gap-4">
         <Image
           src="/tam_yan_kirmizi_beyaz.svg"

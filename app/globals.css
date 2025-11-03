@@ -137,15 +137,15 @@ body {
 
 /* Phone Input Custom Styles */
 .phone-input-custom .PhoneInputInput {
-  @apply border-input h-9 w-full min-w-0 rounded-md border bg-transparent dark:bg-input/30 px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  @apply border-input h-9 w-full min-w-0 max-w-full rounded-md border bg-transparent dark:bg-input/30 px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-base;
   @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
 }
 
 .phone-input-custom .PhoneInputCountrySelect {
-  @apply border-input h-9 min-w-0 rounded-md border bg-transparent dark:bg-input/30 px-2 text-sm shadow-xs transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply border-input h-9 min-w-0 rounded-md border bg-transparent dark:bg-input/30 px-2 text-xs shadow-xs transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
   @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
 }
 
 .phone-input-custom {
-  @apply flex gap-2;
+  @apply flex gap-2 w-full max-w-full overflow-hidden;
 }
