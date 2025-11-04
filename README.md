@@ -22,6 +22,8 @@
 
 ---
 
+<a href="https://kart.lyrarealestate.com" target="_blank">Projeyi canlı görüntüle</a>
+
 ## 📋 İçindekiler
 
 - [Hakkında](#-hakkında)
