@@ -183,8 +183,8 @@ export default function ClientPageContent() {
         const yakaUnvanWidth = lightFontYaka.widthOfTextAtSize(debouncedUnvan, 30);
         const yakaUnvanX = (yakaPageWidth - yakaUnvanWidth) / 2;
 
-        yakaKartiPage.drawText(yakaNameText, { x: yakaNameX, y: yakaNameY, font: customFontYaka, size: 50, color: rgb(255, 255, 255) });
-        yakaKartiPage.drawText(debouncedUnvan, { x: yakaUnvanX, y: yakaKartiPage.getHeight() - 578, font: lightFontYaka, size: 30, color: rgb(255, 255, 255) });
+        yakaKartiPage.drawText(yakaNameText, { x: yakaNameX, y: yakaNameY, font: customFontYaka, size: 50, color: rgb(0.117, 0.117, 0.117) });
+        yakaKartiPage.drawText(debouncedUnvan, { x: yakaUnvanX, y: yakaKartiPage.getHeight() - 578, font: lightFontYaka, size: 30, color: rgb(0.117, 0.117, 0.117) });
         const yakaKartiPdfBytes = await yakaKartiDoc.save();
         // Create separate copies: one for preview (consumed by react-pdf) and one for download
         const yakaKartiPreviewCopy = new Uint8Array(yakaKartiPdfBytes);
