@@ -94,7 +94,7 @@ export default function ClientPageContent() {
         const fontUrl = '/fonts/Unbounded-Regular.ttf';
         const lightFontUrl = '/fonts/Unbounded-Light.ttf';
         const kartvizitUrl = '/templates/kartvizit.pdf';
-        const yakaKartiUrl = '/templates/yaka-karti.pdf';
+        const yakaKartiUrl = '/templates/yaka-karti-beyaz.pdf';
 
         const [fontBytes, lightFontBytes, kartvizitTemplateBytes, yakaKartiTemplateBytes] = await Promise.all([
           fetch(fontUrl).then(async res => {
@@ -183,8 +183,8 @@ export default function ClientPageContent() {
         const yakaUnvanWidth = lightFontYaka.widthOfTextAtSize(debouncedUnvan, 30);
         const yakaUnvanX = (yakaPageWidth - yakaUnvanWidth) / 2;
 
-        yakaKartiPage.drawText(yakaNameText, { x: yakaNameX, y: yakaNameY, font: customFontYaka, size: 50, color: rgb(1, 1, 1) });
-        yakaKartiPage.drawText(debouncedUnvan, { x: yakaUnvanX, y: yakaKartiPage.getHeight() - 578, font: lightFontYaka, size: 30, color: rgb(1, 1, 1) });
+        yakaKartiPage.drawText(yakaNameText, { x: yakaNameX, y: yakaNameY, font: customFontYaka, size: 50, color: rgb(255, 255, 255) });
+        yakaKartiPage.drawText(debouncedUnvan, { x: yakaUnvanX, y: yakaKartiPage.getHeight() - 578, font: lightFontYaka, size: 30, color: rgb(255, 255, 255) });
         const yakaKartiPdfBytes = await yakaKartiDoc.save();
         // Create separate copies: one for preview (consumed by react-pdf) and one for download
         const yakaKartiPreviewCopy = new Uint8Array(yakaKartiPdfBytes);
